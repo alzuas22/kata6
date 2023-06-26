@@ -1,0 +1,30 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mi Cartera - Todos</title>
+</head>
+<body>
+    <nab>
+        <a href="/new_movement">Nuevo</a>
+    </nab>
+    <main>    
+        <h1>Mis movimientos</h1>
+        <table>
+            <tr>
+                <th>Fecha</th>
+                <th>Concepto</th>
+                <th>Importe</th>
+            </tr>
+            {%for movement in the_movements%}
+            <tr>
+                <td>{{movement.fecha}}</td>
+                <td>{{movement.concepto}}</td>
+                <td>{{movement.importe}} {{ movement.divisa}}</td>
+            </tr>
+            {%endfor%}
+        </table>
+    </main>
+    
+</body>
+</html>
