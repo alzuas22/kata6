@@ -1,5 +1,5 @@
 from datetime import date
-import csv
+import csv, os
 
 CURRENCIES = ("EUR", "USD")
 
@@ -27,9 +27,10 @@ class Movement:
 
     @amount.setter
     def amount(self, value):
-        if value == 0:
+        self._amount = float(value)
+        if self._amount  == 0:
             raise ValueError("amount cannot be zero")
-        self._amount = value 
+         
 
     @property
     def currency(self):
@@ -37,9 +38,13 @@ class Movement:
 
     @currency.setter
     def currency(self, value):
-        if value not in CURRENCIES:
-            raise ValueError("Invalid currency.")
         self._currency = value
+        if self._currency not in CURRENCIES:
+            raise ValueError(f"Currency must be in {CURRENCIES}")
+
+
+    def __eq__(self, other):
+        return self.date == other.date and self.abstract== other.abstract and self.amount == other.amount and self.currency == other.currency
         
     
 # Encapsular lectura y escritura en el csv
@@ -47,10 +52,22 @@ class MovementDAO:
     #path (abre y cierra dicho fichero), all devuelve lista de movimientos, insert del movimiento
     def __init__(self, file_path):
         self.path = file_path
-        f=open(file_path, "w")
-        f.write("date,abstract,amount,currency\n")
+        if not os.path.exists(self.path):
+            f=open(file_path, "w")
+            f.write("date,abstract,amount,currency\n")
+
 
     def insert(self, movement):
         f = open(self.path, "a", newline="")
         writer = csv.writer(f, delimiter=",", quotechar='"')
         writer.writerow([movement.date, movement.abstract, movement.amount, movement.currency])
+        f.close() #?
+
+    def all(self):
+        f = open(self.path, "r")
+        reader = csv.DictReader(f, delimiter=",", quotechar='"')
+        movements = []
+        for register in reader:
+            m = Movement(register["date"], register["abstract"], register["amount"], register["currency"])
+            movements.append(m)
+        return movements

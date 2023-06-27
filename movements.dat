@@ -1,8 +1,8 @@
-fecha,concepto,importe,divisa
-01/01/2023,"Sueldo",1000,EUR
-05/01/2023,"Compra pandereta",-20,EUR 
-06/01/2023,"Lotería del niño",250,EUR 
-
-
-
-
+date,abstract,amount,currency
+2023-01-01,"Sueldo",1000,EUR
+2023-01-05,"Mi pandereta, que bonita",-20,EUR
+2023-01-06,"Lotería del niño",250,USD
+2023-06-12,lolailo,1000,EUR,Enviar
+2023-06-05,Medio ambiente,-1000,EUR
+2023-06-26,Algo,1000.3,EUR
+2023-06-26,aaaa,1000.0,EUR

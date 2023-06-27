@@ -1,40 +1,30 @@
-<html lang="en">
-<head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Mi Cartera - Nuevo</title>
-</head>
-<body>
-    <nav>
-        <a href="/" target="_blank">Inicio</a> 
-    </nav>
-    <main>
-        <h1>Nueva entrada</h1>
-        <form action="/new_movement" method="post">
-            <div>
-                <label for="fecha">Fecha:</label>
-                <input type="date" name="fecha" id="fecha">
-            </div>
-            <div>
-                <label for="concepto">Concepto:</label>
-                <input type="text" name="concepto" id="concepto">
-            </div>
-            <div>
-                <label for="cantidad">Cantidad:</label>
-                <input type="number" name="cantidad" id="cantidad" step="0.01">
-            </div>
-            <div>
-                <label for="moneda">Moneda:</label>
-                <select name="moneda" id="moneda">
-                    <option value="EUR">Euros</option>
-                    <option value="USD">Dólares americanos</option>
-                </select>
-            </div>
-                <input type="submit" value="Enviar">
-            <div>
+{% extends "base.html" %}
 
-            </div>
-        </form>
-    </main>
-</body>
-</html>
+{% block content %}
+    <h1>Nueva entrada</h1>
+
+    <form action="/new_movement" method="post">
+        <div>
+            <label for="date">Fecha:</label>
+            <input type="date" name="date" id="date" value="{{ the_form.date }}">
+        </div>
+        <div>
+            <label for="abstract">Concepto:</label>
+            <input type="text" name="abstract" id="abstract" value="{{ the_form.abstract }}">
+        </div>
+        <div>
+            <label for="amount">Cantidad:</label>
+            <input type="number" name="amount" id="amount" step="0.01" value="{{ the_form.amount }}">
+        </div>
+        <div>
+            <label for="currency">Moneda:</label>
+            <select name="currency" id="currency" selected="{{ the_form.currency }}">
+                <option value="EUR">Euros</option>
+                <option value="USD">Dólares americanos</option>
+            </select>
+        </div>
+        <div>
+            <input name="submit" id="submit" type="submit" value="Enviar">
+        </div>    
+    </form>
+{% endblock %}

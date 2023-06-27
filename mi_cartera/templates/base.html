@@ -1,0 +1,26 @@
+<html lang="en">
+<head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="static/pico.css">
+        <title>Mi Cartera - {{title }}</title>
+</head>
+<body>
+    <nav>
+        <a href="/">Inicio</a> 
+        <a href="/new_movement">Nuevo</a>
+    </nav>
+    {% with msgs = get_flashed_messages()%}
+        {% if msgs%}
+        <div>
+            {%for msg in msgs%}
+                <p>{{msgs}}</p>
+            {%endfor%}
+        </div>
+        {% endif %}
+    {% endwith %}
+    <main class="container">
+        {% block content%}{% endblock %}
+    </main>
+</body>
+</html>
